@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Management</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div class="header">
+        <h1>Contact Management System</h1>
+    </div>
+
+    <form action="/add" method="POST" class="contact-form">
+        <h1>Contact Form</h1>
+        <input type="text" name="name" placeholder="Name" required>
+        <input type="text" name="phone" placeholder="Phone" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <button class="submit-button" type="submit">Add Contact</button>
+    </form>
+
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Actions</th>
+        </tr>
+        <% contacts.forEach(contact => { %>
+            <tr>
+                <td><%= contact.name %></td>
+                <td><%= contact.phone %></td>
+                <td><%= contact.email %></td>
+                <td>
+                    <div class="actions-container">
+                        <div>
+                            <button class="action-btn"><a href="/edit/<%= contact._id %>" style="color: blue;"><i class="fa-solid fa-pen"></i></a></button>
+                        </div> or
+                        <div>
+                            <form action="/delete/<%= contact._id %>" method="POST" style="display:inline;">
+                                <button class="action-btn" type="submit" style="color: red;"><i class="fa-solid fa-trash"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        <% }) %>
+    </table>
+</body>
+</html>
